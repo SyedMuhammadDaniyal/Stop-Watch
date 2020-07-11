@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Stop Watch</title>
+    <style>
+        #hour,#min,#sec {
+            background-color: gray;
+            max-width: 300px;
+            height: 200px;
+            margin: 20px;
+            text-align: center;
+            color: white;
+            font-size: 64pt;
+            border-radius: 20px;
+            padding-top: 25px;
+        }
+
+        .btn {
+            width: 100px;
+        }
+        
+        
+    </style>
+</head>
+
+<body style="background-color: black;">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 col-md-4"><div id="hour">00</div></div>
+            <div class="col-sm-8 col-md-4"><div id="min">00</div></div>
+            <div class="col-sm-8 col-md-4"><div id="sec">00</div></div>
+        </div>
+        <div id="btn" class="row d-flex justify-content-center">
+            <div class="col-3 col-sm-12 col-md-1">
+                <button id="button" class="btn btn-primary" onclick="start()">Start</button>
+            </div>
+            <div class="col-3 col-sm-12 col-md-1">
+                <button class="btn btn-primary" onclick="pause()">Pause</button>
+            </div>
+            <div class="col-3 col-sm-12 col-md-1">
+                <button class="btn btn-primary" onclick="reset()">Reset</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        var sec = 0
+        var min = 0
+        var hour = 0
+        function start() {
+            document.getElementById('button').disabled = true
+            myVar = setInterval(function Hour() {
+                document.getElementById('sec').innerHTML = sec
+                sec = sec + 1
+                if (sec == 61) {
+                    sec = 0
+                    document.getElementById('min').innerHTML = min
+                    min = min + 1
+                }
+                if (min == 61) {
+                    min = 0
+                    document.getElementById('hour').innerHTML = hour
+                    hour = hour + 1
+                }
+            }, 1000)
+        }
+        function pause() {
+            clearInterval(myVar)
+            document.getElementById('button').disabled = false
+        }
+        function reset() {
+            sec = 0;
+            min = 0;
+            hour = 0;
+            document.getElementById('sec').innerHTML = sec;
+            document.getElementById('min').innerHTML = min;
+            document.getElementById('hour').innerHTML = hour;
+            document.getElementById('button').disabled = false
+            clearInterval(myVar)
+
+        }
+    </script>
+
+</body>
+
+</html>
